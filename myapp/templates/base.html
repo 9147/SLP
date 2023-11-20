@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SLP</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+<!--    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">-->
+    {% block css %}{% endblock %}
+
+</head>
+<body>
+<nav>
+    <img src="{% static 'images/logo.png' %}" class="sub-nav" alt="logo" height="100%">
+    <ul class="sub-nav">
+        {% if user.is_authenticated %}
+    <li><a href="{% url 'myapp:home' %}">Home</a></li>
+        <li><a href="{% url 'myapp:about' %}">About</a></li>
+        <li><a href="{% url 'myapp:account' %}">Account</a></li>
+        {% endif %}
+
+
+    </ul>
+</nav>
+{% block content %}{% endblock %}
+<footer>
+    <!-- add footer -->
+    <p><a href="https://www.linkedin.com/in/mpaantoijl">@copyright;   2023 Manoj Patil</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'myapp/account.css' %}">
+{% endblock css %}
+{% block content %}
+    <div id="content">
+        <h1>Welcome {{user.first_name}}!!!!!</h1>
+        <div class="container">
+        <div class="deatils">
+        <h2>Account Details</h2>
+        <p>Username: {{user}}</p>
+        <p>First Name: {{user.first_name}}</p>
+        {% if not user.is_superuser %}
+        <p>Team Name: </p>
+        <p>Team Members: </p>
+        {% endif %}
+    </div>
+            <div class="buttons">
+                <div class="button-container">
+                <a>Change Password</a>
+        <a href="{% url 'login:logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

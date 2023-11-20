@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'myapp/home.css' %}">
+{% endblock css %}
+{% block content %}
+    {% if user.is_superuser %}
+    {% for a in groups %}
+        <div class="card">
+        <p>{{ a.name }}</p>
+        <p>{{a.leader.first_name}}</p>
+        <p>{{ a.score }}</p>
+        <div class="button"><div class="sub">-</div><input type="number" class="points" value="300"><div class="add">+</div></div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="block">
+        {% if type != "none" %}
+        <input id="{{group.id}}" {% if type == 'member' %}readonly{% endif %} value="{{ group.name }}" onchange="updateName(this)">
+        <h3>{{ group.leader.first_name }}</h3>
+        <h1>Score: {{ group.score }}</h1>
+    </div>
+        {% else %}
+        You are still not a part of any group.
+        {% endif %}
+    {% endif %}
+    <script type="text/javascript" src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/login/login.js' %}"></script>
+    <script type="text/javascript" src="{% static '/myapp/home.js' %}"></script>
+{% endblock content %}

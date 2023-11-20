@@ -1,0 +1,12 @@
+.block{
+    line-height: 2rem;
+    width:100%;
+    padding:2rem;
+    text-align: center;
+}
+.block>input {
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    font-size: 2rem;
+}
