@@ -9,4 +9,5 @@ urlpatterns = [
     path('about/',about,name='about'),
     path('account',account,name='account'),
     path('UpdateGroupName/',UpdateGroupName,name='UpdateGroupName'),
+    path('UpdateScore/',UpdateScore,name='UpdateScore')
 ]

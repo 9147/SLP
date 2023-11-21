@@ -38,3 +38,16 @@ def UpdateGroupName(request):
         group.save()
         return JsonResponse({'status':'success'})
     return HttpResponse(404)
+
+@login_required(login_url="/login/")
+def UpdateScore(request):
+    if request.method== "POST":
+        group = Group.objects.get(id=request.POST['id'])
+        print(group)
+        if(request.POST['type'] == 'sub'):
+            group.score -= int(request.POST['value'])
+        else:
+            group.score += int(request.POST['value'])
+        group.save()
+        return JsonResponse({'status':'success'})
+    return HttpResponse(404)
