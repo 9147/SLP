@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from .models import Group
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 
 # Create your views here.
@@ -50,4 +51,15 @@ def UpdateScore(request):
             group.score += int(request.POST['value'])
         group.save()
         return JsonResponse({'status':'success'})
+    return HttpResponse(404)
+
+@login_required(login_url="/login/")
+def updatePassword(request,id):
+    if request.method=='POST':
+        user = User.objects.get(id=id)
+        # print(user)
+        # print(request.POST['password'])
+        user.set_password(request.POST.get('password'))
+        user.save()
+        return HttpResponseRedirect('/account')
     return HttpResponse(404)

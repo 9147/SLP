@@ -4,12 +4,25 @@
     <link rel="stylesheet" href="{% static 'myapp/account.css' %}">
 {% endblock css %}
 {% block content %}
+<form action="updatePassword/{{user.id}}" method="post" class="block" id="block" onsubmit="return validateForm()">
+    <div class="inner-block">
+        {% csrf_token %}
+        <h1>Change Password</h1>
+        <input type="text" id="password" name="password" class="pass" placeholder="Password" required>
+        <input type="password" id="password2"  class="pass" placeholder="Re-Enter Password" required>
+        <div class="button">
+            <div class="cancel" onclick="closeBlock()">Cancel</div>
+            <input class="submit" type="submit" value="Submit">
+        </div>
+    
+    </div>
+</form>
     <div id="content">
         <h1>Welcome {{user.first_name}}!!!!!</h1>
         <div class="container">
         <div class="deatils">
         <h2>Account Details</h2>
-        <p>Username: {{user}}</p>
+        <p id="{{user.id}}">Username: {{user}}</p>
         <p>First Name: {{user.first_name}}</p>
         {% if not user.is_superuser %}
         <p>Team Name: </p>
@@ -18,10 +31,11 @@
     </div>
             <div class="buttons">
                 <div class="button-container">
-                <a>Change Password</a>
+                <a onclick="openBlock()">Change Password</a>
         <a href="{% url 'login:logout' %}">Logout</a>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{% static '/myapp/account.js' %}"></script>
 {% endblock content %}
