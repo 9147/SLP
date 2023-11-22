@@ -22,11 +22,17 @@
 
 /* end style scroll */
 
-.block{
+.block {
+    height: 100vh;
     line-height: 2rem;
-    width:100%;
-    padding:2rem;
+    width: 100%;
+    padding: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25vh;
+    gap: 1rem;
+    align-items: center;
 }
 .block>input {
     text-align: center;
