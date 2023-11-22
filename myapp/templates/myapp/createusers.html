@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'myapp/createusers.css' %}">
+{% endblock css %}
+{% block content %}
+    <div id="content">
+        <h1>Create New Users</h1>
+        <textarea name="usernames" id="usernames" cols="30" rows="10" placeholder="usernames"></textarea>
+        <textarea name="firstname" id="firstname" cols="30" rows="10" placeholder="first name"></textarea>
+        <textarea name="lastname" id="lastname" cols="30" rows="10" placeholder="Last name"></textarea>
+        <textarea name="emails" id="emails" cols="30" rows="10" placeholder="Emails"></textarea>
+        <textarea name="passwords" id="passwords" cols="30" rows="10" placeholder="passwords"></textarea>
+        <div class="button-container"><div class="button" onclick="checkData()"> Create Users</div></div>
+    </div>
+    <script type="text/javascript" src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/login/login.js' %}"></script>
+    <script type="text/javascript" src="{% static '/myapp/createusers.js' %}"></script>
+{% endblock content %}

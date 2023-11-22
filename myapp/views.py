@@ -3,6 +3,7 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from .models import Group
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+import re
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -28,13 +29,22 @@ def about(request):
 
 @login_required(login_url="/login/")
 def account(request):
-    return render(request,'myapp/account.html')
+    user=User.objects.get(id=request.user.id)
+    group=Group.objects.filter(members=user)
+    if(len(group)==0):
+        group=Group.objects.filter(leader=user)
+    # print(group)
+    if len(group)==0:
+        group=None
+    else:
+        group=group[0]
+    return render(request,'myapp/account.html',context={'group':group})
 
 @login_required(login_url="/login/")
 def UpdateGroupName(request):
     if request.method== "POST":
         group = Group.objects.get(id=request.POST['id'])
-        print(group)
+        # print(group)
         group.name = request.POST['value']
         group.save()
         return JsonResponse({'status':'success'})
@@ -44,14 +54,14 @@ def UpdateGroupName(request):
 def UpdateScore(request):
     if request.method== "POST":
         group = Group.objects.get(id=request.POST['id'])
-        print(group)
+        # print(group)
         if(request.POST['type'] == 'sub'):
             group.score -= int(request.POST['value'])
         else:
             group.score += int(request.POST['value'])
         group.save()
         return JsonResponse({'status':'success'})
-    return HttpResponse(404)
+    return HttpResponse(status=404)
 
 @login_required(login_url="/login/")
 def updatePassword(request,id):
@@ -62,4 +72,57 @@ def updatePassword(request,id):
         user.set_password(request.POST.get('password'))
         user.save()
         return HttpResponseRedirect('/account')
-    return HttpResponse(404)
+    return HttpResponse(status=404)
+
+@login_required(login_url="/login/")
+def createusers(request):
+    # print(request.POST)
+    # user = User.objects.create_user(username=request.POST.get('username'),password=request.POST.get('password'),email=request.POST.get('email'))
+    # user.save()
+    if request.user.is_superuser:
+        return render(request,'myapp/createusers.html')
+    return HttpResponse(status=404)
+
+@login_required(login_url="/login/")
+def updateUsers(request):
+    if request.method=='POST':
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+        # print(request.POST)
+        dic=request.POST.dict()
+        # print(dic)
+        val=0
+        li=[]
+        a=[]
+        for key in dic:
+            if val==4:
+                val=0
+                li.append(a)
+                a=[key[:-11]]
+            elif val==0:
+                a=[key[:-11]]
+            a.append(dic[key])
+            if val==2:
+                if not re.fullmatch(regex, dic[key]):
+                    # print("Invalid Email",key,dic[key])
+                    return HttpResponse(status=404)
+            # print(key,dic[key])
+            val+=1
+            # print(val)
+        li.append(a)
+        print(li)
+        for a in li:
+            if User.objects.filter(username=a[0]).exists():
+                user=User.objects.get(username=a[0])
+                user.first_name=a[1]
+                user.last_name=a[2]
+                user.email=a[3]
+                user.set_password(a[4])
+                user.save()
+            else:
+                user = User.objects.create_user(username=a[0],password=a[4],email=a[3],first_name=a[1],last_name=a[2])
+                user.save()
+                # print("Username already exists")
+        # user = User.objects.create_user(username=request.POST.get('username'),password=request.POST.get('password'),email=request.POST.get('email'))
+        # user.save()
+        return HttpResponseRedirect('/')
+    return HttpResponse(status=404)

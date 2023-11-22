@@ -7,7 +7,7 @@
 
 {% endblock css %}
 {% block content %}
-
+<div class="outer-container">
 <div class="container" id="container">
     <h1>Login</h1>
     {% csrf_token %}
@@ -26,6 +26,7 @@
         </select>
     </div>
     <div class="submit" onclick="login()"><button>Submit</button></div>
+</div>
 </div>
 </div>
 

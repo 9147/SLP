@@ -14,7 +14,6 @@
             <div class="cancel" onclick="closeBlock()">Cancel</div>
             <input class="submit" type="submit" value="Submit">
         </div>
-    
     </div>
 </form>
     <div id="content">
@@ -25,8 +24,8 @@
         <p id="{{user.id}}">Username: {{user}}</p>
         <p>First Name: {{user.first_name}}</p>
         {% if not user.is_superuser %}
-        <p>Team Name: </p>
-        <p>Team Members: </p>
+        <p>Team Name:{{group.name}} </p>
+        <p>Team Members: {{group.leader}} {% for a in group.members.all %}, {{a}} {% endfor %}</p>
         {% endif %}
     </div>
             <div class="buttons">
