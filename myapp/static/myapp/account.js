@@ -23,10 +23,40 @@ function ResetGame(){
         type: 'POST',
         success: function (data) {
             alert('Game reset successfully');
-            window.location.href='/';
+            window.location.href='/account';
         },
         error: function (data) {
             alert('Error in resetting game');
+        }
+    });
+}
+
+function ActivateTeams(){
+    setRequestHeader();
+    $.ajax({
+        url: '/activateTeams/',
+        type: 'POST',
+        success: function (data) {
+            alert('Teams activated successfully');
+            window.location.href='/account';
+        },
+        error: function (data) {
+            alert('Error in activating teams');
+        }
+    });
+}
+
+function ClearTeams(){
+    setRequestHeader();
+    $.ajax({
+        url: '/clearTeams/',
+        type: 'POST',
+        success: function (data) {
+            alert('Teams cleared successfully');
+            window.location.href='/account';
+        },
+        error: function (data) {
+            alert('Error in clearing teams');
         }
     });
 }

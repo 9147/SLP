@@ -1,14 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
-from .models import Group
+from .models import Group,Status
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 import re
 import csv
+import pickle
+import os
 
 # Create your views here.
 @login_required(login_url="/login/")
 def home(request):
+    status=Status.objects.get(id=1)
     a=Group.objects.all()
     # print(a)
     type = "none"
@@ -22,7 +25,7 @@ def home(request):
             type="member"
             groupvalue=group
             break
-    return render(request,'myapp/home.html',context={'groups':a,'type':type,'group':groupvalue})
+    return render(request,'myapp/home.html',context={'groups':a,'type':type,'group':groupvalue,'status':status.status})
 
 @login_required(login_url="/login/")
 def about(request):
@@ -30,9 +33,14 @@ def about(request):
 
 @login_required(login_url="/login/")
 def account(request):
+    status=Status.objects.get(id=1)
+    f=open('data.pkl', 'rb')
+    dict=pickle.load(f)
+    # print(dict)
     user=User.objects.get(id=request.user.id)
     group=Group.objects.filter(members=user)
     type="member"
+    code=None
     if(len(group)==0):
         type="leader"
         group=Group.objects.filter(leader=user)
@@ -42,7 +50,16 @@ def account(request):
         group=None
     else:
         group=group[0]
-    return render(request,'myapp/account.html',context={'group':group,'type':type})
+    if type=='leader':
+        # print(user.username[-1])
+        i=int(user.username[-1])
+        code=dict[i][0]
+    elif not user.is_staff:
+        code=dict[user.username][2]
+    print(code)
+    # print(type)
+    f.close()
+    return render(request,'myapp/account.html',context={'group':group,'type':type,'code':code,'status':status.status})
 
 @login_required(login_url="/login/")
 def UpdateGroupName(request):
@@ -135,16 +152,71 @@ def updateUsers(request):
 def resetGame(request):
     if request.method=='POST':
         groups=Group.objects.all()
+        status=Status.objects.get(id=1)
+        status.status=1
+        status.save()
         for group in groups:
             group.score=1000
             group.save()
         with open('movies.csv', mode='r', newline='') as file:
             reader = csv.reader(file)
             data = [row for row in reader]
-
         # Displaying the data read from the CSV file
         data= data[1:]
-        for row in data:
-            print(row)
+        val={}
+        ids={'SLP'+str(i) for i in range(13,133)}
+        g={a.id for a in groups}
+        # print(g)
+        # print(ids.pop())
+        past=""
+        gid=""
+        for a in data:
+            if past!=a[0]:
+                gid=g.pop()
+                val[gid] = [a[0]]
+                past=a[0]
+            val[ids.pop()] = [gid]+a
+            g_obj=Group.objects.get(id=gid)
+            g_obj.movie=a[0]
+            g_obj.save()
+        # print(val)
+        with open('data.pkl', 'wb') as f:
+            pickle.dump(val, f)
+        return JsonResponse({'status':'success'})
+    return HttpResponse(status=404)
+
+
+@login_required(login_url="/login/")
+def activateTeams(request):
+    if request.method=='POST':
+        status=Status.objects.get(id=1)
+        status.status=2
+        status.save()
+        groups=Group.objects.all()
+        for group in groups:
+            group.members.clear()
+            group.save()
+        with open('data.pkl', 'rb') as f:
+            dict=pickle.load(f)
+            for key in dict:
+                if type(key)!=int:
+                    user=User.objects.get(username=key)
+                    group=Group.objects.get(id=dict[key][0])
+                    group.members.add(user)
+                    group.save()
+        return JsonResponse({'status':'success'})
+    return HttpResponse(status=404)
+
+def clearTeams(request):
+    if request.method=='POST':
+        status=Status.objects.get(id=1)
+        status.status=0
+        status.save()
+        groups=Group.objects.all()
+        # with open('data.pkl', 'w') as file:
+        #     pickle.dump({}, file)
+        for group in groups:
+            group.members.clear()
+            group.save()
         return JsonResponse({'status':'success'})
     return HttpResponse(status=404)

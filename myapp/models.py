@@ -9,3 +9,8 @@ class Group(models.Model):
     movie = models.CharField(max_length=200,blank=True)
     def __str__(self):
         return f'{self.id} {self.name}'
+
+class Status(models.Model):
+    status = models.IntegerField(default=0)
+    def __str__(self):
+        return f'{self.status}'

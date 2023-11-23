@@ -20,15 +20,15 @@
     {% else %}
     <div class="block">
         <div class="inner-block">
-        {% if type != "none" %}
+        {% if type != "none" and not status == 0 %}
         <input id="{{group.id}}" {% if type == 'member' %}readonly{% endif %} value="{{ group.name }}" onchange="updateName(this)">
         <h3>{{ group.leader.first_name }}</h3>
         <h1>Score: {{ group.score }}</h1>
-        </div>
-    </div>
         {% else %}
         You are still not a part of any group.
         {% endif %}
+    </div>
+</div>
     {% endif %}
     <script type="text/javascript" src="{% static 'jquery-3.7.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static '/login/login.js' %}"></script>

@@ -14,4 +14,6 @@ urlpatterns = [
     path('createusers/',createusers,name='createusers'),
     path('updateUsers/',updateUsers,name='updateUsers'),
     path('resetGame/',resetGame,name='resetGame'),
+    path('activateTeams/',activateTeams,name='activateTeams'),
+    path('clearTeams/',clearTeams,name='clearTeams'),
 ]
