@@ -4,6 +4,7 @@ from .models import Group
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 import re
+import csv
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -31,14 +32,17 @@ def about(request):
 def account(request):
     user=User.objects.get(id=request.user.id)
     group=Group.objects.filter(members=user)
+    type="member"
     if(len(group)==0):
+        type="leader"
         group=Group.objects.filter(leader=user)
     # print(group)
     if len(group)==0:
+        type="none"
         group=None
     else:
         group=group[0]
-    return render(request,'myapp/account.html',context={'group':group})
+    return render(request,'myapp/account.html',context={'group':group,'type':type})
 
 @login_required(login_url="/login/")
 def UpdateGroupName(request):
@@ -125,4 +129,22 @@ def updateUsers(request):
         # user = User.objects.create_user(username=request.POST.get('username'),password=request.POST.get('password'),email=request.POST.get('email'))
         # user.save()
         return HttpResponseRedirect('/')
+    return HttpResponse(status=404)
+
+@login_required(login_url="/login/")
+def resetGame(request):
+    if request.method=='POST':
+        groups=Group.objects.all()
+        for group in groups:
+            group.score=1000
+            group.save()
+        with open('movies.csv', mode='r', newline='') as file:
+            reader = csv.reader(file)
+            data = [row for row in reader]
+
+        # Displaying the data read from the CSV file
+        data= data[1:]
+        for row in data:
+            print(row)
+        return JsonResponse({'status':'success'})
     return HttpResponse(status=404)

@@ -23,7 +23,7 @@
 /* end style scroll */
 
 .block {
-    height: 100vh;
+    height: calc( 100vh - 8rem);
     line-height: 2rem;
     width: 100%;
     padding: 2rem;
@@ -34,7 +34,20 @@
     gap: 1rem;
     align-items: center;
 }
-.block>input {
+.inner-block {
+    display: flex;
+    min-width: 500px;
+    aspect-ratio: 2/1;
+    padding: 2rem;
+    /* background-color: red; */
+    flex-direction: column;
+    justify-content: space-around;
+    backdrop-filter: blur(21px);
+    border: solid black;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.inner-block>input {
     text-align: center;
     background-color: transparent;
     border: 1px solid #ccc;
@@ -59,6 +72,9 @@
     justify-content: center;
 }
 .card {
+    border-radius: 10px;
+    backdrop-filter: blur(100px);
+    /* background: #000000a6; */
     padding: 1rem;
     border: solid 1px #fcfdfd85;
     display: flex;

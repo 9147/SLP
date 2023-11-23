@@ -19,10 +19,12 @@
 </div>
     {% else %}
     <div class="block">
+        <div class="inner-block">
         {% if type != "none" %}
         <input id="{{group.id}}" {% if type == 'member' %}readonly{% endif %} value="{{ group.name }}" onchange="updateName(this)">
         <h3>{{ group.leader.first_name }}</h3>
         <h1>Score: {{ group.score }}</h1>
+        </div>
     </div>
         {% else %}
         You are still not a part of any group.

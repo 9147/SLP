@@ -13,17 +13,20 @@ html,body{
 }
 body{
     background: url('images/wallpaper.jpg');
+    object-fit: cover;
     background-repeat: no-repeat;
     background-size: cover;
 }
-nav{
+nav {
     margin-bottom: 2rem;
-    height:4rem;
-    background-color:#090c0cc7;
-    display:flex;
+    height: 4rem;
+    background-color: #090c0cc7;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    backdrop-filter: blur(2px);
+    border-bottom: solid 2px black;
+    background: #0000008a;
+    /* backdrop-filter: blur(20px); */
 }
 nav div{
     height:auto;

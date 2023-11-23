@@ -13,4 +13,5 @@ urlpatterns = [
     path('updatePassword/<int:id>',updatePassword,name='updatePassword'),
     path('createusers/',createusers,name='createusers'),
     path('updateUsers/',updateUsers,name='updateUsers'),
+    path('resetGame/',resetGame,name='resetGame'),
 ]

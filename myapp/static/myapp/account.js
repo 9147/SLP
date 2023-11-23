@@ -16,3 +16,17 @@ function validateForm(){
     }
     
 }
+function ResetGame(){
+    setRequestHeader();
+    $.ajax({
+        url: '/resetGame/',
+        type: 'POST',
+        success: function (data) {
+            alert('Game reset successfully');
+            window.location.href='/';
+        },
+        error: function (data) {
+            alert('Error in resetting game');
+        }
+    });
+}

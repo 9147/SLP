@@ -23,9 +23,13 @@
         <h2>Account Details</h2>
         <p id="{{user.id}}">Username: {{user}}</p>
         <p>First Name: {{user.first_name}}</p>
-        {% if not user.is_superuser %}
+        {% if user.is_superuser %}
+        <p class="Start-button" onclick="ResetGame()">Start Over </p>
+        <p class="Start-button">Activate Teams</p>
+        {% else %}
         <p>Team Name:{{group.name}} </p>
         <p>Team Members: {{group.leader}} {% for a in group.members.all %}, {{a}} {% endfor %}</p>
+        <p>Dialogue: </p>
         {% endif %}
     </div>
             <div class="buttons">
@@ -36,5 +40,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/login/login.js' %}"></script>
     <script type="text/javascript" src="{% static '/myapp/account.js' %}"></script>
 {% endblock content %}

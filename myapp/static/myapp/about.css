@@ -2,7 +2,7 @@
     position: absolute;
     right: 12.5vw;
     width: 75vw;
-    backdrop-filter: blur(66px);
+    backdrop-filter: blur(20px);
     border-radius: 1.2rem;
     padding: 2rem;
     min-height: 60vh;
