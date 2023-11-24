@@ -42,12 +42,9 @@ function login(){
     console.log("login");
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    var type = document.getElementById("type").value;
-    console.log(type);
     var data = {
         username: username,
         password: password,
-        type: type,
     };
     console.log(data);
 

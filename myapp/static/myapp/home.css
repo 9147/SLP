@@ -54,8 +54,9 @@
     font-size: 2rem;
 }
 .container-cards {
-    border: solid .1px #ffffff40;
-    height: calc(100% - 10rem);
+    margin-top: -2rem;
+    /* border: solid .1px #ffffff40; */
+    height: calc(100% - 7rem);
     width: 100%;
     overflow-y: scroll;
     display: flex;
@@ -73,7 +74,7 @@
 }
 .card {
     border-radius: 10px;
-    backdrop-filter: blur(100px);
+    backdrop-filter: blur(30px);
     /* background: #000000a6; */
     padding: 1rem;
     border: solid 1px #fcfdfd85;

@@ -5,14 +5,16 @@
     color: aliceblue;
 }
 html,body{
+    font-size: 20px;
     height:100%;
     width:100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Chilanka', cursive;
     color:aliceblue;
     z-index: -1;
     overflow: hidden;
     
 }
+
 body{
     background: url('images/wallpaper.jpg');
     object-fit: cover;
@@ -36,11 +38,11 @@ nav div{
     pointer-events: none;
     user-select: none;
 }
-nav ul{
-    padding:1.5rem;
+nav ul {
+    padding: 1.5rem;
     display: flex;
     list-style: none;
-    gap:2rem;
+    gap: 1rem;
 }
 nav ul li a{
     text-decoration: none;
@@ -49,6 +51,7 @@ nav ul li a{
     transition: all 0.3s ease;
 }
 footer {
+    font-family: SANS-SERIF;
     position: absolute;
     bottom: 0px;
     background: transparent;
@@ -85,5 +88,9 @@ footer p a{
 @media screen and (max-width: 1200px) {
     body{
         background: url('images/wallpaper2.jpg');
+    }
+    .sub-nav {
+        object-fit: cover;
+        height: 3rem;
     }
   }

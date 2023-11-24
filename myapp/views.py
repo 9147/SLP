@@ -157,7 +157,7 @@ def resetGame(request):
         status.status=1
         status.save()
         for group in groups:
-            group.score=1000
+            group.score=5000
             group.save()
         with open(os.path.join(settings.STATIC_ROOT, 'data/movies.csv'), mode='r', newline='') as file:
             reader = csv.reader(file)

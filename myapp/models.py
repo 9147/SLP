@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Group(models.Model):
     name = models.CharField(max_length=200,unique=True)
-    score = models.IntegerField(default=1000)
+    score = models.IntegerField(default=5000)
     members = models.ManyToManyField(User,blank=True)
     leader = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True,related_name='leader')
     movie = models.CharField(max_length=200,blank=True)
