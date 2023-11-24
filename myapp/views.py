@@ -165,7 +165,7 @@ def resetGame(request):
         # Displaying the data read from the CSV file
         data= data[1:]
         val={}
-        ids={'SLP'+str(i) for i in range(13,133)}
+        ids={'SLP'+str(i) for i in range(12,122)}
         g={a.id for a in groups}
         # print(g)
         # print(ids.pop())

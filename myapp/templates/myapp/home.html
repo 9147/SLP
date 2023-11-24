@@ -10,8 +10,8 @@
     {% for a in groups %}
         <div class="card">
         <p id="{{a.id}}">{{ a.name }}</p>
-        <p>{{a.leader.first_name}}</p>
-        <p>{{ a.score }}</p>
+        <p>Leader: {{a.leader.first_name}} {{a.leader.last_name}}</p>
+        <p>Score: {{ a.score }}</p>
         <div class="button"><div class="sub" onclick="update(this,'sub')">-</div><input type="number" class="points" value="300"><div class="add" onclick="update(this,'add')">+</div></div>
         </div>
     {% endfor %}
