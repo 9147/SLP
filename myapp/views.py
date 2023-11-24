@@ -3,6 +3,7 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from .models import Group,Status
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.conf import settings
 import re
 import csv
 import pickle
@@ -34,7 +35,7 @@ def about(request):
 @login_required(login_url="/login/")
 def account(request):
     status=Status.objects.get(id=1)
-    f=open('data.pkl', 'rb')
+    f=open(os.path.join(settings.STATIC_ROOT, 'data/data.pkl'), 'rb')
     dict=pickle.load(f)
     # print(dict)
     user=User.objects.get(id=request.user.id)
@@ -158,7 +159,7 @@ def resetGame(request):
         for group in groups:
             group.score=1000
             group.save()
-        with open('movies.csv', mode='r', newline='') as file:
+        with open(os.path.join(settings.STATIC_ROOT, 'data/movies.csv'), mode='r', newline='') as file:
             reader = csv.reader(file)
             data = [row for row in reader]
         # Displaying the data read from the CSV file
@@ -180,7 +181,7 @@ def resetGame(request):
             g_obj.movie=a[0]
             g_obj.save()
         # print(val)
-        with open('data.pkl', 'wb') as f:
+        with open(os.path.join(settings.STATIC_ROOT, 'data/data.pkl'), 'wb') as f:
             pickle.dump(val, f)
         return JsonResponse({'status':'success'})
     return HttpResponse(status=404)
@@ -196,7 +197,7 @@ def activateTeams(request):
         for group in groups:
             group.members.clear()
             group.save()
-        with open('data.pkl', 'rb') as f:
+        with open(os.path.join(settings.STATIC_ROOT, 'data/data.pkl'), 'rb') as f:
             dict=pickle.load(f)
             for key in dict:
                 if type(key)!=int:
@@ -213,8 +214,6 @@ def clearTeams(request):
         status.status=0
         status.save()
         groups=Group.objects.all()
-        # with open('data.pkl', 'w') as file:
-        #     pickle.dump({}, file)
         for group in groups:
             group.members.clear()
             group.save()

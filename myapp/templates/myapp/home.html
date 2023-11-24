@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static 'myapp/home.css' %}">
 {% endblock css %}
 {% block content %}
-    {% if user.is_superuser %}
+    {% if user.is_staff %}
     <div class="container-cards">
         <div class="inner-container">
     {% for a in groups %}

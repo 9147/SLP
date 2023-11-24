@@ -28,9 +28,11 @@
         <p class="Start-button" onclick="ResetGame()">Start Over </p>
         <p class="Start-button" onclick="ActivateTeams()">Activate Teams</p>
         {% else %}
+        {% if not user.is_staff %}
         <p>Team Name: {% if not status == 0 %}{{group.name}} {% endif %}</p>
         <p>Team Leader: {% if not status == 0 %} {{group.leader.first_name}} {{group.leader.last_name}} {% endif %}</p>
         <p>Team Members:{% if not status == 0 %} {{group.leader.first_name}} {% for a in group.members.all %}, {{a.first_name}} {% endfor %}{% endif %}</p>
+        {% endif %}
         {% if type == "leader" and not status == 0 %}
         <p>Movie:  {{code}} </p>
         {% else %}
