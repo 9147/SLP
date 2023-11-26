@@ -14,8 +14,6 @@ Welcome to the IEEE Student Leadership Program (SLP) repository! This repository
 - Backend: Django
 - Database: MySQL
 
-## How to Contribute
-
 ## Contact
 For inquiries or suggestions, contact the project maintainer Manoj Patil at manojpatil9147@gmail.com.
 
