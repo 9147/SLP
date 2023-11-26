@@ -1,4 +1,6 @@
 # IEEE Student Leadership Program (SLP) Site Repository
+![image](https://github.com/9147/SLP/assets/42509321/28e200ac-5b91-4f0b-b99d-6f60e3dc4e0d)
+
 
 ## Overview
 Welcome to the IEEE Student Leadership Program (SLP) repository! This repository houses the digital platform developed for the annual SLP conducted by IEEE Git. It aims to provide an engaging digital space for participants, enabling seamless event management and interaction.
