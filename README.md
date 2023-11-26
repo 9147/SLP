@@ -1,5 +1,6 @@
 # IEEE Student Leadership Program (SLP) Site Repository
-![image](https://github.com/9147/SLP/assets/42509321/28e200ac-5b91-4f0b-b99d-6f60e3dc4e0d)
+![image](https://github.com/9147/SLP/assets/42509321/26416828-007b-4630-bdc2-e8b7e85ad78f)
+
 
 
 ## Overview
