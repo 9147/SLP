@@ -16,9 +16,6 @@ Backend: Django
 Database: Mysql
 🤝 How to Contribute:
 
-📄 License:
-This project is licensed under [License]. Refer to the LICENSE file for details.
-
 
 📧 Contact:
 For inquiries or suggestions, contact the project maintainer Manoj Patil at manojpatil9147@gmail.com.
