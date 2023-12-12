@@ -75,12 +75,23 @@ def UpdateGroupName(request):
 @login_required(login_url="/login/")
 def UpdateScore(request):
     if request.method== "POST":
+        s=request.user.first_name
         group = Group.objects.get(id=request.POST['id'])
         # print(group)
+        value = request.POST['value']
+        print(value)
         if(request.POST['type'] == 'sub'):
-            group.score -= int(request.POST['value'])
+            group.score -= int(value)
+            print(group.score,int(value))
+            s+=" substraced "
         else:
-            group.score += int(request.POST['value'])
+            group.score += int(value)
+            print(group.score,int(value))
+            s+=" added "
+        s+=str(value)+" points to "+str(group.id)+"("+group.name+")"
+        with open(os.path.join(settings.STATIC_ROOT, 'data/logs.txt'), 'a') as f:
+            f.write(s)
+            f.write('\n')
         group.save()
         return JsonResponse({'status':'success'})
     return HttpResponse(status=404)
@@ -152,6 +163,8 @@ def updateUsers(request):
 @login_required(login_url="/login/")
 def resetGame(request):
     if request.method=='POST':
+        with open(os.path.join(settings.STATIC_ROOT, 'data/logs.txt'), 'w') as f:
+            pass
         groups=Group.objects.all()
         status=Status.objects.get(id=1)
         status.status=1

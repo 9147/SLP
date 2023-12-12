@@ -1,0 +1,37 @@
+.outer-container {
+    display: flex;
+    margin-top: -2rem;
+    height: calc( 100vh - 7rem);
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    gap: 1rem;
+    display: flex;
+    border-radius: 1.2rem;
+    width: 30%;
+    min-width: 400px;
+    aspect-ratio: 8/7.6;
+    /* min-height: 500px; */
+    /* background-color: red; */
+    backdrop-filter: blur(18px);
+    flex-direction: column;
+    border: solid .3px;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-around;
+}
+.container>.title{
+    font-size: 1.2rem;
+}
+.container>input{
+    padding: .2rem;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    background-color: #ffebcd00;
+    border: solid .2px;
+}
+.container>.submit {
+    cursor: pointer;
+}

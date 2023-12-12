@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'MarkMePresent/home.css' %}">
+<script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+
+{% endblock css %}
+{% block content %}
+<div class="outer-container"  onsubmit="return validateForm()">
+    <form action="" class="container">
+        {% csrf_token %}
+    <span class="title">Mark Attendance for IEEE Programming League 2.O</span>
+    <input type="email" id="email" name="email" class="email" placeholder="Email id" required>
+    <input type="text" id="name" class="name" class="name" placeholder="first 4 letters of name" required>
+    <input class="submit" type="submit">
+</form>
+</div>
+<script type="text/javascript" src="{% static '/login/login.js' %}"></script>
+<script type="text/javascript" src="{% static '/MarkMePresent/home.js' %}"></script>
+
+{% endblock content %}

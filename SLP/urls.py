@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls',namespace='myapp')),
     path('login/', include('login.urls',namespace='login')),
+    path('MarkMePresent/',include('MarkMePresent.urls',namespace='MarkMePresent'))
 ]

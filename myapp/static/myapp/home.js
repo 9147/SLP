@@ -34,6 +34,7 @@ function update(arg,value){
             value: arg.parentElement.children[1].value,
         },
         success: function (data) {
+            console.log(arg.parentElement.children[1].value+arg.parentElement.parentElement.children[2].innerHTML);
             if(value=="add"){
             // arg.parentElement.children[1].value;
             arg.parentElement.parentElement.children[2].innerHTML=String(Number(arg.parentElement.parentElement.children[2].innerHTML)+Number(arg.parentElement.children[1].value));

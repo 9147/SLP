@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1','webmaster0ieeegit.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'MarkMePresent',
     'login.apps.LoginConfig',
     'myapp.apps.MyappConfig',
     'django.contrib.admin',
