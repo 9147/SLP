@@ -21,7 +21,7 @@ function validateForm() {
                 alert("User not found");
             }else{
             alert("Successfully Marked Present");
-        close();}
+        window.location.href="/";}
             // window.location.href = "../";
         },
         error: function (jqXHR, textStatus, errorThrown) {
